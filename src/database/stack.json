@@ -11,7 +11,7 @@
     },
     {
         "name": "Frameworks Frontend",
-        "description": "Conhecimento e experiência em ReactJs, NextJs e VueJs.",
+        "description": "Conhecimento em ReactJs, NextJs e VueJs.",
         "icons": [
             "react/react-original",
             "nextjs/nextjs-original",
@@ -20,7 +20,7 @@
     },
     {
         "name": "PHP",
-        "description": "Conhecimento e experiência em de PHP e Laravel.",
+        "description": "Conhecimento em PHP e Laravel.",
         "icons": [
             "php/php-original",
             "laravel/laravel-original"
