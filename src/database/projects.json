@@ -1,0 +1,16 @@
+[
+    {
+        "id": "ad632930-34a3-4c8b-977b-d4c756b70f45",
+        "phase": "finalizado",
+        "name": "Portfolio",
+        "description": "Versão monolítica do portfolio feita com Laravel e ReactJs",
+        "technologies": [
+            "Next14",
+            "TypeScript",
+            "Tailwind CSS",
+            "Laravel11",
+            "Vercel"
+        ],
+        "image": " storage/projects/ad632930-34a3-4c8b-977b-d4c756b70f45/img1.jpg"
+    }
+]
