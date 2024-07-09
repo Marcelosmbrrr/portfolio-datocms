@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
+import posts from '@/database/posts.json';
 
 export interface Post {
     id: string;
@@ -11,8 +12,6 @@ export interface Post {
     created_at: string;
     updated_at: string;
 }
-
-const posts: Post[] = [];
 
 export function PostList() {
 

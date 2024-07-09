@@ -1,8 +1,7 @@
 import * as React from 'react';
-import Image from "next/image";
-import { ProjectList } from "../components/ProjectList";
-import { PostList } from "../components/PostList";
-import { StackList } from "../components/StackList";
+import { ProjectList } from '@/components/ProjectList';
+import { StackList } from '@/components/StackList';
+import { PostList } from '@/components/PostList';
 
 export default function Home() {
   return (
