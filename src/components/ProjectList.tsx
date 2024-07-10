@@ -1,16 +1,33 @@
 import * as React from 'react';
-import projects from '@/database/projects.json'
+import { performRequest } from '@/libs/datocms';
 
 export interface Project {
     id: string;
     name: string;
     phase: string;
     description: string;
-    technologies: string[];
-    image: string;
+    technologies: string;
+    image: { url: string };
 }
 
-export function ProjectList() {
+const QUERY = `
+  query {
+    allProjects {
+        phase
+        technologies
+        name
+        id
+        image {
+        url
+        }
+        description
+    }
+}`;
+
+export async function ProjectList() {
+
+    const { data: { allProjects } } = await performRequest({ query: QUERY });
+
     return (
         <div className="max-w-7xl px-5 md:px-0 mx-auto mt-10">
             <div className="flex items-center gap-2">
@@ -24,10 +41,11 @@ export function ProjectList() {
                 <h1 className="text-2xl font-bold text-gray-800"><span className="text-red-400">Projetos</span> recentes</h1>
             </div>
             <div className="flex justify-start flex-wrap pb-3 mt-5 gap-3 rounded-l-lg">
-                {projects.map((project: Project) =>
+
+                {allProjects && allProjects.map((project: Project) =>
                     <div key={project.id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
                         <div className='relative h-56 w-full overflow-y-hidden'>
-                            <img className="rounded-t-lg h-full w-full" src={project.image} alt="project image" />
+                            <img className="rounded-t-lg h-full w-full" src={project.image.url} alt="project image" />
                         </div>
                         <div className="p-5">
                             <div className="flex justify-between items-center mb-2">
@@ -40,7 +58,7 @@ export function ProjectList() {
                                 {project.description}
                             </div>
                             <div className="flex flex-wrap gap-1 mt-2">
-                                {project.technologies.map((tech: string) =>
+                                {project.technologies.split(',').map(item => item.trim()).map((tech: string) =>
                                     <div key={tech}
                                         className="min-w-fit text-white bg-neutral-800 text-sm font-medium px-2.5 py-0.5 rounded border border-gray-700 inline-flex items-center justify-center">
                                         {tech}
@@ -50,11 +68,13 @@ export function ProjectList() {
                         </div>
                     </div>
                 )}
-                {projects.length === 0 &&
+
+                {!allProjects &&
                     <div>
                         <span className="text-gray-800">Nenhum projetado encontrado.</span>
                     </div>
                 }
+
             </div >
         </div >
     )

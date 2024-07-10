@@ -1,5 +1,5 @@
 import * as React from 'react';
-import stacks from '@/database/stack.json'
+import { performRequest } from '@/libs/datocms';
 
 export interface Stack {
     name: string;
@@ -7,7 +7,20 @@ export interface Stack {
     icons: string[];
 }
 
-export function StackList() {
+const QUERY = `
+  query {
+    allStacks {
+      id
+      name
+      icons
+      description
+    }
+  }
+`;
+
+export async function StackList() {
+
+    const { data: { allStacks } } = await performRequest({ query: QUERY });
 
     function getIconCdn(icon: string) {
         return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon}.svg`;
@@ -15,7 +28,7 @@ export function StackList() {
 
     function renderIcons(icons: string[]) {
         return icons.map((icon) =>
-            <img v-for="icon in tech.icon" src={getIconCdn(icon)} className="h-10 w-10" alt={`${icon} icon`} />
+            <img v-for="icon in stack.icon" src={getIconCdn(icon)} className="h-10 w-10" alt={`${icon} icon`} />
         )
     }
 
@@ -32,19 +45,21 @@ export function StackList() {
                 <h1 className="text-2xl font-bold text-gray-800"><span className="text-red-400">Tecnologias</span> utilizadas</h1>
             </div>
             <div className='flex flex-wrap gap-8 mt-6'>
-                {stacks.map((tech: Stack) =>
-                    <div className="flex flex-col p-1 gap-2 basis-72 h-36" key={tech.name}>
+
+                {allStacks && allStacks.map((stack: Stack) =>
+                    <div className="flex flex-col p-1 gap-2 basis-72 h-36" key={stack.name}>
                         <div className='h-auto flex gap-2'>
-                            {renderIcons(tech.icons)}
+                            {renderIcons(stack.icons)}
                         </div>
                         <div className='h-auto'>
-                            <span className='font-semibold text-gray-800'>{tech.name}</span>
+                            <span className='font-semibold text-gray-800'>{stack.name}</span>
                         </div>
                         <div className='h-full w-full text-justify'>
-                            <p className='text-sm text-gray-800'>{tech.description}</p>
+                            <p className='text-sm text-gray-800'>{stack.description}</p>
                         </div>
                     </div>
                 )}
+
             </div>
         </div>
     )

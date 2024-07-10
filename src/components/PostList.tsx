@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
-import posts from '@/database/posts.json';
+import { performRequest } from '@/libs/datocms';
 
 export interface Post {
     id: string;
@@ -8,12 +8,28 @@ export interface Post {
     description: string;
     category: string;
     tags: string;
-    image: string;
+    image: { url: string }[];
     created_at: string;
     updated_at: string;
 }
 
-export function PostList() {
+const QUERY = `
+  query {
+    allPosts(filter: {isPublished: {eq: true}}) {
+        category
+        description
+        id
+        name
+        tags
+        image {
+        url
+        }
+    }
+}`;
+
+export async function PostList() {
+
+    const { data: { allPosts } } = await performRequest({ query: QUERY });
 
     return (
         <div className="max-w-7xl px-5 md:px-0 mx-auto mt-10">
@@ -29,13 +45,13 @@ export function PostList() {
             </div>
             <div className="flex justify-start flex-wrap pb-3 gap-3 mt-5 cursor-pointer rounded-l-lg">
 
-                {posts.map((post: Post) =>
+                {allPosts && allPosts.map((post: Post) =>
                     <Link href={"/post/" + post.id}
                         key={post.id}
                         className="max-w-sm bg-white hover:bg-gray-100 border border-gray-200 rounded-lg shadow"
                     >
                         <div className='relative h-56 w-full overflow-y-hidden'>
-                            <img className="rounded-t-lg h-full w-full" src={post.image} alt="post image" />
+                            <img className="rounded-t-lg h-full w-full" src={post.image[0].url} alt="post image" />
                         </div>
                         <div className="p-5">
                             <div className="flex justify-between items-center mb-2">
@@ -48,7 +64,7 @@ export function PostList() {
                                 {post.description}
                             </div>
                             <div className="flex flex-wrap gap-1 mt-2">
-                                {post.tags.split(",").map((tag: string) => (
+                                {post.tags.split(",").map(item => item.trim()).map((tag: string) => (
                                     <div
                                         key={tag}
                                         className="min-w-fit text-white bg-neutral-800 text-sm font-medium px-2.5 py-0.5 rounded border border-gray-700 inline-flex items-center justify-center"
@@ -61,11 +77,12 @@ export function PostList() {
                     </Link>
                 )}
 
-                {posts.length === 0 &&
+                {!allPosts &&
                     <div>
                         <span className="text-gray-800">Nenhum post encontrado.</span>
                     </div>
                 }
+
             </div>
         </div>
     )
