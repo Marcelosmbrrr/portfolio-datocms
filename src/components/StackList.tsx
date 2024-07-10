@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { performRequest } from '@/libs/datocms';
 
-export interface Stack {
+interface Stack {
     name: string;
     description: string;
     icons: string[];

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { performRequest } from '@/libs/datocms';
 
-export interface Post {
+interface Post {
     id: string;
     name: string;
     description: string;
@@ -45,7 +45,7 @@ export async function PostList() {
             </div>
             <div className="flex justify-start flex-wrap pb-3 gap-3 mt-5 cursor-pointer rounded-l-lg">
 
-                {allPosts && allPosts.map((post: Post) =>
+                {allPosts.length > 0 && allPosts.map((post: Post) =>
                     <Link href={"/post/" + post.id}
                         key={post.id}
                         className="max-w-sm bg-white hover:bg-gray-100 border border-gray-200 rounded-lg shadow"
@@ -77,7 +77,7 @@ export async function PostList() {
                     </Link>
                 )}
 
-                {!allPosts &&
+                {allPosts.length === 0 &&
                     <div>
                         <span className="text-gray-800">Nenhum post encontrado.</span>
                     </div>

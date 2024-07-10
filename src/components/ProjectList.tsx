@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { performRequest } from '@/libs/datocms';
 
-export interface Project {
+interface Project {
     id: string;
     name: string;
     phase: string;
@@ -42,7 +42,7 @@ export async function ProjectList() {
             </div>
             <div className="flex justify-start flex-wrap pb-3 mt-5 gap-3 rounded-l-lg">
 
-                {allProjects && allProjects.map((project: Project) =>
+                {allProjects.length > 0 && allProjects.map((project: Project) =>
                     <div key={project.id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
                         <div className='relative h-56 w-full overflow-y-hidden'>
                             <img className="rounded-t-lg h-full w-full" src={project.image.url} alt="project image" />
@@ -69,7 +69,7 @@ export async function ProjectList() {
                     </div>
                 )}
 
-                {!allProjects &&
+                {allProjects.length === 0 &&
                     <div>
                         <span className="text-gray-800">Nenhum projetado encontrado.</span>
                     </div>
