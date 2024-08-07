@@ -8,7 +8,7 @@ interface Post {
     description: string;
     category: string;
     tags: string;
-    image: { url: string }[];
+    image: { url: string };
     created_at: string;
     updated_at: string;
 }
@@ -41,17 +41,17 @@ export async function PostList() {
                             d="M5 4 1 8l4 4m10-8 4 4-4 4M11 1 9 15" />
                     </svg>
                 </div>
-                <h1 className="text-2xl font-bold text-gray-800"><span className="text-red-400">Posts</span> recentes</h1>
+                <h1 className="text-2xl font-bold text-gray-800"><span className="text-red-400">Posts</span></h1>
             </div>
             <div className="flex justify-start flex-wrap pb-3 gap-3 mt-5 cursor-pointer rounded-l-lg">
 
                 {allPosts.length > 0 && allPosts.map((post: Post) =>
                     <Link href={"/post/" + post.id}
                         key={post.id}
-                        className="max-w-sm bg-white hover:bg-gray-100 border border-gray-200 rounded-lg shadow"
+                        className="max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:scale-105 hover:shadow-xl transition-all"
                     >
                         <div className='relative h-56 w-full overflow-y-hidden'>
-                            <img className="rounded-t-lg h-full w-full" src={post.image[0].url} alt="post image" />
+                            <img className="rounded-t-lg h-full w-full" src={post.image.url} alt="post image" />
                         </div>
                         <div className="p-5">
                             <div className="flex justify-between items-center mb-2">

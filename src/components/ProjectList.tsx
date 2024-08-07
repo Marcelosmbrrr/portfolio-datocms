@@ -38,7 +38,7 @@ export async function ProjectList() {
                             d="M5 4 1 8l4 4m10-8 4 4-4 4M11 1 9 15" />
                     </svg>
                 </div>
-                <h1 className="text-2xl font-bold text-gray-800"><span className="text-red-400">Projetos</span> recentes</h1>
+                <h1 className="text-2xl font-bold text-gray-800"><span className="text-red-400">Projetos</span></h1>
             </div>
             <div className="flex justify-start flex-wrap pb-3 mt-5 gap-3 rounded-l-lg">
 

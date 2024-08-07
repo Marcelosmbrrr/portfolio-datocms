@@ -5,6 +5,7 @@ interface Stack {
     name: string;
     description: string;
     icons: string[];
+    studied: boolean;
 }
 
 const QUERY = `
@@ -14,6 +15,7 @@ const QUERY = `
       name
       icons
       description
+      studied
     }
   }
 `;
@@ -42,20 +44,20 @@ export async function StackList() {
                             d="M5 4 1 8l4 4m10-8 4 4-4 4M11 1 9 15" />
                     </svg>
                 </div>
-                <h1 className="text-2xl font-bold text-gray-800"><span className="text-red-400">Tecnologias</span> utilizadas</h1>
+                <h1 className="text-2xl font-bold text-gray-800"><span className="text-red-400">Tecnologias</span></h1>
             </div>
             <div className='flex flex-wrap gap-8 mt-6'>
 
                 {allStacks && allStacks.map((stack: Stack) =>
                     <div className="flex flex-col p-1 gap-2 basis-72 h-36" key={stack.name}>
-                        <div className='h-auto flex gap-2'>
+                        <div className={`h-auto flex gap-2 ${stack.studied ? 'opacity-1' : 'opacity-30'}`}>
                             {renderIcons(stack.icons)}
                         </div>
                         <div className='h-auto'>
-                            <span className='font-semibold text-gray-800'>{stack.name}</span>
+                            <span className={`font-semibold ${stack.studied ? 'text-gray-800' : 'text-gray-300'}`}>{stack.name}</span>
                         </div>
                         <div className='h-full w-full text-justify'>
-                            <p className='text-sm text-gray-800'>{stack.description}</p>
+                            <p className={`text-sm ${stack.studied ? 'text-gray-800' : 'text-gray-300'}`}>{stack.description}</p>
                         </div>
                     </div>
                 )}

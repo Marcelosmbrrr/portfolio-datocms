@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
     const QUERY = `
     query {
-        allPosts(filter: {id: {eq: ${params.id}}}) {
+        post(filter: {id: {eq: ${params.id}}}) {
             category
             description
             id
@@ -28,7 +28,9 @@ export default async function Page({ params }: { params: { id: string } }) {
         }
     }`;
 
-    //const { data: { allPosts } } = await performRequest({ query: QUERY });
+    const { data: { post } } = await performRequest({ query: QUERY });
+
+    console.log(post.description)
 
     return (
         <div className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-gray-50 antialiased">
