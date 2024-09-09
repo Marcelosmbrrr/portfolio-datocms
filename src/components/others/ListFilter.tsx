@@ -12,7 +12,7 @@ export function ListFilter(props: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const currentGroup = searchParams.get(props.list) ?? "Todos";
+  const currentGroup = searchParams.get(props.list) ?? "Tecnologia";
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
     const group = event.target.value;

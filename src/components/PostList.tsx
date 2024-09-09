@@ -14,21 +14,7 @@ interface Post {
   updated_at: string;
 }
 
-const QUERY1 = `
-  query {
-    allPosts(filter: {isPublished: {eq: true}}) {
-        category
-        description
-        id
-        name
-        tags
-        image {
-        url
-        }
-    }
-}`;
-
-const QUERY2 = `
+const QUERY = `
   query($group: String) {
     allPosts(filter: {
       isPublished: { eq: true }
@@ -47,14 +33,13 @@ const QUERY2 = `
 `;
 
 export async function PostList(props: { group?: string }) {
-
   const { group } = props;
 
   const {
     data: { allPosts },
   } = await performRequest({
-    query: !group || group === "Todos" ? QUERY1 : QUERY2,
-    variables: { group: group },
+    query: QUERY,
+    variables: { group: group ? group : "Tecnologia" },
   });
 
   return (
@@ -83,10 +68,7 @@ export async function PostList(props: { group?: string }) {
       </div>
 
       <div className="flex space-x-3 mt-3">
-        <ListFilter
-          groups={["Todos", "Filosofia", "Tecnologia"]}
-          list={"post"}
-        />
+        <ListFilter groups={["Tecnologia", "Filosofia"]} list={"post"} />
       </div>
 
       <div className="flex justify-start flex-wrap pb-3 gap-3 mt-5 cursor-pointer rounded-l-lg">
