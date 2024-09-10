@@ -54,7 +54,7 @@ export async function ProjectList() {
           </svg>
         </div>
         <h1 className="text-2xl font-bold text-gray-800">
-          <span className="text-red-400">Projetos</span>
+          <span className="text-red-400">Estudos e Projetos</span>
         </h1>
       </div>
       <div className="flex justify-start flex-wrap pb-3 mt-5 gap-3 rounded-l-lg">
@@ -64,35 +64,28 @@ export async function ProjectList() {
               key={project.id}
               className="max-w-sm bg-white border border-gray-200 rounded-lg shadow"
             >
-              <div className="relative h-56 w-full overflow-y-hidden">
-                <img
-                  className="rounded-t-lg h-full w-full"
-                  src={project.image.url}
-                  alt="project image"
-                />
-              </div>
               <div className="p-5">
                 <div className="h-10 flex justify-between items-center mb-2">
                   <h5 className="text-xl mr-2 font-bold tracking-tight text-gray-900">
                     {project.name}
                   </h5>
-                  <div className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white text-gray-800 shadow-sm">
-                    {project.phase}
+                  <div className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white text-gray-800">
+                    Status: {project.phase}
                   </div>
                 </div>
                 <div className="h-20 text-gray-800 break-words text-justify mt-2">
                   {project.description}
                 </div>
-                <div className="h-10 flex flex-wrap gap-1 mt-2">
+                <div className="h-fit flex flex-wrap gap-1">
                   {project.technologies
                     .split(",")
                     .map((item) => item.trim())
                     .map((tech: string) => (
                       <div
                         key={tech}
-                        className="h-fit min-w-fit text-white bg-neutral-800 text-sm font-medium px-2.5 py-0.5 rounded border border-gray-700 inline-flex items-center justify-center"
+                        className="h-fit min-w-fit text-white bg-neutral-800 font-medium px-1 py-0.5 rounded border border-gray-700 inline-flex items-center justify-center"
                       >
-                        {tech}
+                        <span className="text-sm">{tech}</span>
                       </div>
                     ))}
                 </div>
