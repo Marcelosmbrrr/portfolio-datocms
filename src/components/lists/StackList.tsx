@@ -43,7 +43,7 @@ export async function StackList() {
   return (
     <div className="max-w-7xl px-5 lg:px-0 mx-auto bg-transparent">
       <div className="flex items-center gap-2">
-        <div className="text-red-400">
+        <div className="text-white">
           <svg
             className="w-6 h-6"
             aria-hidden="true"
@@ -64,11 +64,11 @@ export async function StackList() {
           <span className="text-red-400">Tecnologias</span>
         </h1>
       </div>
-      <div className="flex flex-wrap gap-8 mt-6">
+      <div className="flex flex-wrap gap-6 mt-6">
         {allStacks &&
           allStacks.map((stack: Stack) => (
             <div
-              className="flex flex-col p-1 gap-2 basis-72 h-36"
+              className="flex flex-col p-2 gap-2 basis-72 h-36"
               key={stack.name}
             >
               <div
@@ -81,7 +81,7 @@ export async function StackList() {
               <div className="h-auto">
                 <span
                   className={`font-semibold ${
-                    stack.studied ? "text-gray-800" : "text-gray-300"
+                    stack.studied ? "text-gray-100" : "text-gray-800"
                   }`}
                 >
                   {stack.name}
@@ -90,7 +90,7 @@ export async function StackList() {
               <div className="h-full w-full text-justify">
                 <p
                   className={`text-sm ${
-                    stack.studied ? "text-gray-800" : "text-gray-300"
+                    stack.studied ? "text-gray-100" : "text-gray-800"
                   }`}
                 >
                   {stack.description}

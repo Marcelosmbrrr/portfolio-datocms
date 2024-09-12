@@ -28,9 +28,9 @@ export function ListFilter(props: Props) {
   }
 
   return (
-    <div className="flex space-x-3 mt-3">
+    <div className="flex space-x-3">
       {props.groups.map((group) => (
-        <div key={group} className="flex items-center me-4">
+        <div key={group} className="flex items-center">
           <input
             checked={currentGroup === group}
             onChange={onChange}
@@ -42,7 +42,7 @@ export function ListFilter(props: Props) {
           />
           <label
             htmlFor={`inline-${group}-radio`}
-            className="ms-2 text-sm font-medium text-gray-900"
+            className="ms-2 text-sm font-medium text-white"
           >
             {group}
           </label>
