@@ -46,7 +46,7 @@ export default function Home({
                 </div>
                 <div className="flex justify-between items-center w-auto order-1">
                   <ul className="flex items-center mt-4 font-medium space-x-8">
-                    <li>
+                    {/* <li>
                       <a
                         href="https://www.linkedin.com/in/marcelosmbr/"
                         target="_blank"
@@ -54,7 +54,7 @@ export default function Home({
                       >
                         Blog
                       </a>
-                    </li>
+                    </li>*/}
                     <li>
                       <a
                         href="https://github.com/Marcelosmbrrr"
