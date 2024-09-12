@@ -91,14 +91,14 @@ export async function ProjectList() {
                 </div>
                 <div className="text-white break-words underline text-right mt-2">
                   {project.repositoryLink && (
-                    <a href={project.repositoryLink} target="_blank">
+                    <a className="hover:text-red-400" href={project.repositoryLink} target="_blank">
                       Repositório
                     </a>
                   )}
                   {project.deployLink && (
                     <a
                       href={project.deployLink}
-                      className="ml-3"
+                      className="ml-3 hover:text-red-400"
                       target="_blank"
                     >
                       Deploy
