@@ -69,8 +69,8 @@ export async function ProjectList() {
                   <h5 className="text-xl mr-2 font-bold tracking-tight text-white">
                     {project.name}
                   </h5>
-                  <div className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white text-gray-800">
-                    Status: {project.phase}
+                  <div className="w-fit inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white text-gray-800">
+                    {project.phase}
                   </div>
                 </div>
                 <div className="h-20 text-gray-100 break-words text-justify mt-2">
