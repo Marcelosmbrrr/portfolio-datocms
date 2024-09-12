@@ -2,31 +2,10 @@ import * as React from "react";
 import { performRequest } from "@/libs/datocms";
 import { format } from "date-fns";
 
-interface Post {
-  name: string;
-  tags: string;
-  id: string;
-  description: string;
-  category: string;
-  _updatedAt: string;
-  text: {
-    value: {
-      document: {
-        children: {
-          type: "paragraph";
-          children: {
-            value: string;
-          }[];
-        }[];
-      };
-    };
-  };
-}
-
 export default async function Page({ params }: { params: { id: string } }) {
   const QUERY = `
-    query {
-        post(filter: {id: {eq: ${params.id}}}) {
+    query GetPost($id: ItemId) {
+        post(filter: {id: {eq: $id}}) {
             category
             description
             id
@@ -42,60 +21,77 @@ export default async function Page({ params }: { params: { id: string } }) {
         }
     }`;
 
-  const {
-    data: { post },
-  } = await performRequest({ query: QUERY });
+  const variables = {
+    id: params.id,
+  };
+
+  const { data } = await performRequest({ query: QUERY, variables });
 
   return (
-    <div className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-gray-50 antialiased">
+    <div className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-stone-950 antialiased">
       <img
         id="background"
         className="absolute -left-20 top-0 max-w-[877px]"
         src="https://laravel.com/assets/img/welcome/background.svg"
       />
       <div className="relative min-h-screen">
-        <div className="flex justify-between text-gray-800 px-4 mx-auto max-w-screen-xl">
+        <div className="flex justify-between text-white px-4 mx-auto max-w-screen-xl">
           <article className="mx-auto w-full max-w-2xl">
             <header className="mb-4 lg:mb-6">
               <address className="flex items-center mb-6">
-                <div className="inline-flex items-center mr-3 text-sm text-gray-900">
+                <div className="inline-flex items-center mr-3 text-sm text-white">
                   <div>
                     <a
                       href="#"
                       rel="author"
-                      className="text-xl font-bold text-gray-900"
+                      className="text-xl font-bold text-white"
                     >
                       MarceloSmbr
                     </a>
-                    <p className="text-base text-gray-500">{post.category}</p>
-                    <p className="text-base text-gray-500">
-                      <time>{format(new Date(post._updatedAt), 'MMM. d, yyyy')}</time>
+                    <p className="text-base text-gray-400">
+                      {data.post.category}
+                    </p>
+                    <p className="text-base text-gray-400">
+                      <time>
+                        {format(new Date(data.post._updatedAt), "MMM. d, yyyy")}
+                      </time>
                     </p>
                   </div>
                 </div>
               </address>
-              <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl">
-                {post.name}
+              <h1 className="mb-4 text-3xl font-extrabold leading-tight text-white lg:mb-6 lg:text-4xl">
+                {data.post.name}
               </h1>
             </header>
             <figure className="my-5">
               <img
-                src={post.image.url}
+                src={data.post.image.url}
                 alt="Digital art by Anonymous"
                 className="rounded-md"
               />
               <figcaption>{""}</figcaption>
             </figure>
-            {post.text.value.document.children.map(
+            {data.post.text.value.document.children.map(
               (
                 paragraph: {
                   type: "paragraph";
-                  children: { type: "span"; value: string }[];
+                  children: {
+                    type: "span";
+                    value: string;
+                    marks?: string[];
+                  }[];
                 },
                 index: number
               ) => (
                 <p key={index} className="my-2">
-                  {paragraph.children[0].value}
+                  {paragraph.children.map((span, spanIndex) => (
+                    <span
+                      key={spanIndex}
+                      className={span.marks && span.marks.includes("strong") ? "font-bold text-xl": "text-gray-300"}
+                    >
+                      {span.value}
+                    </span>
+                  ))}
                 </p>
               )
             )}

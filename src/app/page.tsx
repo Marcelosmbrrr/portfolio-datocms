@@ -13,7 +13,7 @@ export default function Home({
   };
 }) {
   return (
-    <div className="bg-stone-950 text-black/50">
+    <div className="bg-stone-950">
       <img
         id="background"
         className="absolute -left-20 top-0 max-w-[877px]"

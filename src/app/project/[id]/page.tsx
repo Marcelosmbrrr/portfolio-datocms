@@ -2,27 +2,6 @@ import * as React from "react";
 import { performRequest } from "@/libs/datocms";
 import { format } from "date-fns";
 
-interface Project {
-  name: string;
-  tags: string;
-  id: string;
-  description: string;
-  category: string;
-  _updatedAt: string;
-  text: {
-    value: {
-      document: {
-        children: {
-          type: "paragraph";
-          children: {
-            value: string;
-          }[];
-        }[];
-      };
-    };
-  };
-}
-
 export default async function Page({ params }: { params: { id: string } }) {
   const QUERY = `
     query {
@@ -47,7 +26,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   } = await performRequest({ query: QUERY });
 
   return (
-    <div className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-gray-50 antialiased">
+    <div className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-stone-950 text-white antialiased">
       <img
         id="background"
         className="absolute -left-20 top-0 max-w-[877px]"
@@ -69,7 +48,9 @@ export default async function Page({ params }: { params: { id: string } }) {
                     </a>
                     <p className="text-base text-gray-500">{post.category}</p>
                     <p className="text-base text-gray-500">
-                      <time>{format(new Date(post._updatedAt), 'MMM. d, yyyy')}</time>
+                      <time>
+                        {format(new Date(post._updatedAt), "MMM. d, yyyy")}
+                      </time>
                     </p>
                   </div>
                 </div>
