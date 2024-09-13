@@ -85,7 +85,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const { data } = await performRequest({ query: QUERY, variables });
 
   return (
-    <div className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-stone-950 antialiased">
+    <div className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-neutral-900 antialiased">
       <img
         id="background"
         className="absolute -left-20 top-0 max-w-[877px]"

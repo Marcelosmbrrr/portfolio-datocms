@@ -19,7 +19,7 @@ export default function Home({
           crossOrigin="anonymous"
         ></script>
       </Head>
-      <div className="bg-stone-950">
+      <div className="bg-neutral-900">
         <img
           id="background"
           className="absolute -left-20 top-0 max-w-[877px]"
