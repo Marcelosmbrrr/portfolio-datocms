@@ -80,7 +80,7 @@ export async function PostList(props: { group?: string }) {
             <Link
               href={"/post/" + post.id}
               key={post.id}
-              className="max-w-sm bg-white rounded-lg shadow hover:scale-105 transition-all"
+              className="max-w-sm border border-zinc-800 rounded-lg shadow hover:scale-105 transition-all"
             >
               <div className="relative h-56 w-full overflow-y-hidden">
                 <img
@@ -91,14 +91,14 @@ export async function PostList(props: { group?: string }) {
               </div>
               <div className="p-5">
                 <div className="flex justify-between items-center mb-2">
-                  <h5 className="text-xl mr-2 font-bold tracking-tight text-gray-900">
+                  <h5 className="text-xl mr-2 font-bold tracking-tight text-white">
                     {post.name}
                   </h5>
                   <div className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white text-gray-800 shadow-sm">
                     {post.category}
                   </div>
                 </div>
-                <div className="h-20 text-gray-800 break-words text-justify mt-2">
+                <div className="h-20 text-gray-200 break-words text-justify mt-2">
                   {post.description}
                 </div>
               </div>
