@@ -42,7 +42,7 @@ export async function ProjectList(props: { category?: string }) {
   } = await performRequest({
     query: QUERY,
     variables: {
-      category: !category || category === "Projeto" ? "Projeto" : "Estudo",
+      category: !category || category === "Estudo" ? "Estudo" : "Projeto",
     },
   });
 
@@ -75,7 +75,11 @@ export async function ProjectList(props: { category?: string }) {
         <div>
           <span className="text-white">Filtro:</span>
         </div>
-        <FilterSelector options={["Projeto", "Estudo"]} list={"project"} currentOption={category ?? "Projeto"} />
+        <FilterSelector
+          options={["Estudo", "Projeto"]}
+          list={"project"}
+          currentOption={category ?? "Estudo"}
+        />
       </div>
 
       <div className="flex justify-start flex-wrap pb-3 mt-5 gap-3 rounded-l-lg">
