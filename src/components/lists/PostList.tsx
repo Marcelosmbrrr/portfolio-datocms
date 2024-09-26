@@ -1,7 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { performRequest } from "@/libs/datocms";
-import { ListFilter } from "../others/ListFilter";
+import { FilterSelector } from "../others/FilterSelector";
 
 interface Post {
   id: string;
@@ -15,10 +15,10 @@ interface Post {
 }
 
 const QUERY = `
-  query($group: String) {
+  query($category: String) {
     allPosts(filter: {
       isPublished: { eq: true }
-      category: { eq: $group }
+      category: { eq: $category }
     }) {
       category
       description
@@ -32,14 +32,16 @@ const QUERY = `
   }
 `;
 
-export async function PostList(props: { group?: string }) {
-  const { group } = props;
+export async function PostList(props: { category?: string }) {
+  const { category } = props;
 
   const {
     data: { allPosts },
   } = await performRequest({
     query: QUERY,
-    variables: { group: !group || group === "Tecnologia" ? "Tecnologia" : "Filosofia" },
+    variables: {
+      category: !category || category === "Tecnologia" ? "Tecnologia" : "Filosofia",
+    },
   });
 
   return (
@@ -71,7 +73,7 @@ export async function PostList(props: { group?: string }) {
         <div>
           <span className="text-white">Filtro:</span>
         </div>
-        <ListFilter groups={["Tecnologia", "Outros"]} list={"post"} />
+        <FilterSelector options={["Tecnologia", "Outros"]} list={"post"} currentOption={category ?? "Tecnologia"} />
       </div>
 
       <div className="flex justify-start flex-wrap pb-3 gap-3 mt-5 cursor-pointer rounded-l-lg">

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { performRequest } from "@/libs/datocms";
+import { FilterSelector } from "../others/FilterSelector";
 
 interface Project {
   id: string;
@@ -10,28 +11,40 @@ interface Project {
   image: { url: string };
   repositoryLink: string;
   deployLink: string;
+  category: string;
 }
 
 const QUERY = `
-  query {
-    allProjects {
-    name
-    phase
-    technologies
-    id
-    description
-    repositoryLink
-    deployLink
-    image {
-      url
+  query($category: String) {
+    allProjects(filter: {
+      category: { eq: $category }
+    }) {
+      name
+      phase
+      technologies
+      id
+      description
+      repositoryLink
+      deployLink
+      category
+      image {
+        url
+      }
     }
   }
-}`;
+`;
 
-export async function ProjectList() {
+export async function ProjectList(props: { category?: string }) {
+  const { category } = props;
+
   const {
     data: { allProjects },
-  } = await performRequest({ query: QUERY });
+  } = await performRequest({
+    query: QUERY,
+    variables: {
+      category: !category || category === "Projeto" ? "Projeto" : "Estudo",
+    },
+  });
 
   return (
     <div className="max-w-7xl px-5 md:px-0 mx-auto mt-10">
@@ -57,6 +70,14 @@ export async function ProjectList() {
           <span className="text-red-400">Projetos</span>
         </h1>
       </div>
+
+      <div className="flex items-center space-x-3 mt-3">
+        <div>
+          <span className="text-white">Filtro:</span>
+        </div>
+        <FilterSelector options={["Projeto", "Estudo"]} list={"project"} currentOption={category ?? "Projeto"} />
+      </div>
+
       <div className="flex justify-start flex-wrap pb-3 mt-5 gap-3 rounded-l-lg">
         {allProjects.length > 0 &&
           allProjects.map((project: Project) => (
@@ -69,8 +90,10 @@ export async function ProjectList() {
                   <h5 className="text-xl mr-2 font-bold tracking-tight text-white">
                     {project.name}
                   </h5>
-                  <div className="w-fit inline-flex items-center gap-x-1.5 p-1 rounded text-xs font-medium border border-gray-200 bg-white text-gray-800">
-                    {project.phase}
+                  <div className="space-x-2">
+                    <div className="w-fit inline-flex items-center gap-x-1.5 p-1 rounded text-xs font-medium border border-gray-200 bg-white text-gray-800">
+                      {project.category}
+                    </div>
                   </div>
                 </div>
                 <div className="h-20 text-gray-100 break-words text-justify mt-2">
@@ -83,15 +106,19 @@ export async function ProjectList() {
                     .map((tech: string) => (
                       <div
                         key={tech}
-                        className="h-fit min-w-fit text-black bg-white font-medium px-1 py-0.5 rounded border border-gray-700 inline-flex items-center justify-center"
+                        className="h-fit min-w-fit text-black bg-white font-medium p-1 rounded border border-gray-700 inline-flex items-center justify-center"
                       >
-                        <span className="text-sm">{tech}</span>
+                        <span className="text-xs">{tech}</span>
                       </div>
                     ))}
                 </div>
                 <div className="text-white break-words underline text-right mt-2">
                   {project.repositoryLink && (
-                    <a className="hover:text-red-400" href={project.repositoryLink} target="_blank">
+                    <a
+                      className="hover:text-red-400"
+                      href={project.repositoryLink}
+                      target="_blank"
+                    >
                       Repositório
                     </a>
                   )}
@@ -111,7 +138,7 @@ export async function ProjectList() {
 
         {allProjects.length === 0 && (
           <div>
-            <span className="text-gray-500">Nenhum projetado encontrado.</span>
+            <span className="text-gray-500">Nenhum projeto encontrado.</span>
           </div>
         )}
       </div>
