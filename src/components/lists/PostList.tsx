@@ -82,7 +82,7 @@ export async function PostList(props: { category?: string }) {
             <Link
               href={"/post/" + post.id}
               key={post.id}
-              className="max-w-sm border border-zinc-800 rounded-lg shadow hover:scale-105 transition-all"
+              className="max-w-sm border border-zinc-800 rounded-lg shadow transition duration-300 ease-in-out transform hover:scale-105"
             >
               <div className="relative h-56 w-full overflow-y-hidden">
                 <img

@@ -4,6 +4,8 @@ import { ProjectList } from "@/components/lists/ProjectList";
 import { StackList } from "@/components/lists/StackList";
 import { PostList } from "@/components/lists/PostList";
 
+import { Button } from "@/components/ui/button";
+
 export default function Home({
   searchParams,
 }: {
@@ -12,7 +14,6 @@ export default function Home({
     project?: string;
   };
 }) {
-
   return (
     <>
       <Head>
@@ -191,14 +192,14 @@ export default function Home({
                   <a
                     href="mailto:marcelosm.dev@gmail.com"
                     target="_blank"
-                    className="inline-flex mr-2 items-center justify-center px-5 py-3 text-base font-medium text-center text-black bg-white rounded-lg hover:scale-105 transition-all"
+                    className="mr-2 inline-flex items-center justify-center px-5 py-3 text-base font-medium text-stone-800 bg-white rounded-lg shadow transition duration-300 ease-in-out transform hover:scale-105"
                   >
                     Entre em Contato
                   </a>
                   <a
                     href="documents/cv.pdf"
                     target="_blank"
-                    className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-black bg-white rounded-lg hover:scale-105 transition-all"
+                    className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-stone-800 bg-white rounded-lg shadow transition duration-300 ease-in-out transform hover:scale-105"
                   >
                     Currículo
                   </a>
@@ -212,7 +213,7 @@ export default function Home({
             </main>
             <footer>
               <div className="w-full p-4 md:py-8">
-                <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+                <hr className="my-6 border-stone-800 sm:mx-auto lg:my-8" />
                 <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
                   © 2024 <span className="text-red-400">Portfolio SMBR</span>.
                 </span>

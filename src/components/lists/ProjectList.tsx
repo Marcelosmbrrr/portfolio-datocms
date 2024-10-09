@@ -89,7 +89,7 @@ export async function ProjectList(props: { category?: string }) {
               key={project.id}
               className="max-w-sm border border-stone-800 rounded-lg"
             >
-              <div className="p-5">
+              <div className="p-5 w-96">
                 <div className="h-10 flex justify-between items-center mb-2">
                   <h5 className="text-xl mr-2 font-bold tracking-tight text-white">
                     {project.name}
