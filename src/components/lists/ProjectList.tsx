@@ -87,18 +87,14 @@ export async function ProjectList(props: { category?: string }) {
           allProjects.map((project: Project) => (
             <div
               key={project.id}
-              className="max-w-sm border border-stone-800 rounded-lg"
+              className="max-w-sm border border-stone-800 rounded-lg flex flex-col"
             >
-              <div className="p-5 w-96">
+              <div className="p-5 w-96 flex-grow">
                 <div className="h-10 flex justify-between items-center mb-2">
                   <h5 className="text-xl mr-2 font-bold tracking-tight text-white">
                     {project.name}
                   </h5>
-                  <div className="space-x-2">
-                    <div className="w-fit inline-flex items-center gap-x-1.5 p-1 rounded text-xs font-medium border border-gray-200 bg-white text-gray-800">
-                      {project.category}
-                    </div>
-                  </div>
+                  <div className="space-x-2"></div>
                 </div>
                 <div className="h-20 text-gray-100 break-words text-justify mt-2">
                   {project.description}
@@ -110,32 +106,32 @@ export async function ProjectList(props: { category?: string }) {
                     .map((tech: string) => (
                       <div
                         key={tech}
-                        className="h-fit min-w-fit text-black bg-white font-medium p-1 rounded border border-gray-700 inline-flex items-center justify-center"
+                        className="h-fit min-w-fit text-black bg-gray-50 font-medium p-1 rounded border border-gray-700 inline-flex items-center justify-center"
                       >
                         <span className="text-xs">{tech}</span>
                       </div>
                     ))}
                 </div>
-                <div className="text-white break-words underline text-right mt-2">
-                  {project.repositoryLink && (
-                    <a
-                      className="hover:text-red-400"
-                      href={project.repositoryLink}
-                      target="_blank"
-                    >
-                      Repositório
-                    </a>
-                  )}
-                  {project.deployLink && (
-                    <a
-                      href={project.deployLink}
-                      className="ml-3 hover:text-red-400"
-                      target="_blank"
-                    >
-                      Deploy
-                    </a>
-                  )}
-                </div>
+              </div>
+              <div className="text-white break-words underline text-right mt-2 py-2 px-3">
+                {project.repositoryLink && (
+                  <a
+                    className="hover:text-red-400"
+                    href={project.repositoryLink}
+                    target="_blank"
+                  >
+                    Repositório
+                  </a>
+                )}
+                {project.deployLink && (
+                  <a
+                    href={project.deployLink}
+                    className="ml-3 hover:text-red-400"
+                    target="_blank"
+                  >
+                    Deploy
+                  </a>
+                )}
               </div>
             </div>
           ))}
