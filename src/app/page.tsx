@@ -57,7 +57,7 @@ export default function Home({
                     <ul className="flex items-center mt-4 font-medium space-x-3">
                       <li>
                         <a
-                          href="mailto:profissionalsmbr@gmail.com"
+                          href="mailto:marcelosmbr.dev@outlook.com"
                           target="_blank"
                           className="block text-white cursor-pointer"
                         >
