@@ -40,14 +40,15 @@ export async function PostList(props: { category?: string }) {
   } = await performRequest({
     query: QUERY,
     variables: {
-      category: !category || category === "Tecnologia" ? "Tecnologia" : "Filosofia",
+      category:
+        !category || category === "Tecnologia" ? "Tecnologia" : "Filosofia",
     },
   });
 
   return (
     <div className="max-w-7xl px-5 md:px-0 mx-auto mt-10">
       <div className="flex items-center gap-2">
-        <div className="text-white">
+        <div className="text-gray-800 dark:text-gray-200">
           <svg
             className="w-6 h-6"
             aria-hidden="true"
@@ -64,16 +65,20 @@ export async function PostList(props: { category?: string }) {
             />
           </svg>
         </div>
-        <h1 className="text-2xl font-bold text-gray-800">
-          <span className="text-red-400">Blog</span>
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
+          <span className="text-red-600 dark:text-red-500">Blog</span>
         </h1>
       </div>
 
       <div className="flex items-center space-x-3 mt-3">
         <div>
-          <span className="text-white">Filtro:</span>
+          <span className="text-gray-800 dark:text-gray-200">Filtro:</span>
         </div>
-        <FilterSelector options={["Tecnologia", "Outros"]} list={"post"} currentOption={category ?? "Tecnologia"} />
+        <FilterSelector
+          options={["Tecnologia", "Outros"]}
+          list={"post"}
+          currentOption={category ?? "Tecnologia"}
+        />
       </div>
 
       <div className="flex justify-start flex-wrap pb-3 gap-3 mt-5 cursor-pointer rounded-l-lg">
@@ -82,25 +87,25 @@ export async function PostList(props: { category?: string }) {
             <Link
               href={"/post/" + post.id}
               key={post.id}
-              className="max-w-sm border border-zinc-800 rounded-lg shadow transition duration-300 ease-in-out transform hover:scale-105"
+              className="max-w-sm rounded-lg shadow-lg bg-white dark:bg-gray-800 transition duration-300 ease-in-out transform hover:scale-105"
             >
               <div className="relative h-56 w-full overflow-y-hidden">
                 <img
-                  className="rounded-t-lg h-full w-full"
+                  className="rounded-t-lg h-full w-full object-cover"
                   src={post.image.url}
                   alt="post image"
                 />
               </div>
               <div className="p-5">
                 <div className="flex justify-between items-center mb-2">
-                  <h5 className="text-xl mr-2 font-bold tracking-tight text-white">
+                  <h5 className="text-xl mr-2 font-bold tracking-tight text-gray-900 dark:text-gray-100">
                     {post.name}
                   </h5>
-                  <div className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium border border-gray-200 bg-white text-gray-800 shadow-sm">
+                  <div className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow-sm">
                     {post.category}
                   </div>
                 </div>
-                <div className="h-20 text-gray-200 break-words text-justify mt-2">
+                <div className="h-20 text-gray-700 dark:text-gray-300 break-words text-justify mt-2">
                   {post.description}
                 </div>
               </div>
@@ -109,7 +114,9 @@ export async function PostList(props: { category?: string }) {
 
         {allPosts.length === 0 && (
           <div>
-            <span className="text-gray-500">Nenhum post encontrado.</span>
+            <span className="text-gray-500 dark:text-gray-400">
+              Nenhum post encontrado.
+            </span>
           </div>
         )}
       </div>

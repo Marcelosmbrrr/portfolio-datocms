@@ -39,7 +39,7 @@ export function FilterSelector({ options, list, currentOption }: Props) {
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
-        className="text-white"
+        className="text-neutral-900 dark:text-gray-200"
         onChange={onChange}
         value={currentOption}
       >

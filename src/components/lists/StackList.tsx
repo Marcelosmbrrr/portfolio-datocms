@@ -43,7 +43,7 @@ export async function StackList() {
   return (
     <div className="max-w-7xl px-5 lg:px-0 mx-auto bg-transparent">
       <div className="flex items-center gap-2">
-        <div className="text-white">
+        <div className="text-gray-800 dark:text-gray-200">
           <svg
             className="w-6 h-6"
             aria-hidden="true"
@@ -60,8 +60,8 @@ export async function StackList() {
             />
           </svg>
         </div>
-        <h1 className="text-2xl font-bold text-gray-800">
-          <span className="text-red-400">Tecnologias</span>
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
+          <span className="text-red-600 dark:text-red-500">Tecnologias</span>
         </h1>
       </div>
       <div className="flex flex-wrap gap-6 mt-6">
@@ -81,7 +81,9 @@ export async function StackList() {
               <div className="h-auto">
                 <span
                   className={`font-semibold ${
-                    stack.studied ? "text-gray-100" : "text-gray-800"
+                    stack.studied
+                      ? "text-gray-900 dark:text-gray-100"
+                      : "text-gray-400 dark:text-gray-500"
                   }`}
                 >
                   {stack.name}
@@ -90,7 +92,9 @@ export async function StackList() {
               <div className="h-full w-full text-justify">
                 <p
                   className={`text-sm ${
-                    stack.studied ? "text-gray-100" : "text-gray-800"
+                    stack.studied
+                      ? "text-gray-800 dark:text-gray-300"
+                      : "text-gray-400 dark:text-gray-500"
                   }`}
                 >
                   {stack.description}

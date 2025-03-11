@@ -49,7 +49,7 @@ export async function ProjectList(props: { category?: string }) {
   return (
     <div className="max-w-7xl px-5 md:px-0 mx-auto mt-10">
       <div className="flex items-center gap-2">
-        <div className="text-white">
+        <div className="text-gray-800 dark:text-gray-200">
           <svg
             className="w-6 h-6"
             aria-hidden="true"
@@ -66,14 +66,14 @@ export async function ProjectList(props: { category?: string }) {
             />
           </svg>
         </div>
-        <h1 className="text-2xl font-bold text-gray-800">
-          <span className="text-red-400">Projetos</span>
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
+          <span className="text-red-600 dark:text-red-500">Projetos</span>
         </h1>
       </div>
 
       <div className="flex items-center space-x-3 mt-3">
         <div>
-          <span className="text-white">Filtro:</span>
+          <span className="text-gray-800 dark:text-gray-200">Filtro:</span>
         </div>
         <FilterSelector
           options={["Estudo", "Projeto"]}
@@ -87,16 +87,16 @@ export async function ProjectList(props: { category?: string }) {
           allProjects.map((project: Project) => (
             <div
               key={project.id}
-              className="max-w-sm border border-stone-800 rounded-lg flex flex-col"
+              className="max-w-sm rounded-lg flex flex-col shadow bg-white dark:bg-gray-800"
             >
               <div className="p-5 w-96 flex-grow">
                 <div className="h-10 flex justify-between items-center mb-2">
-                  <h5 className="text-xl mr-2 font-bold tracking-tight text-white">
+                  <h5 className="text-xl mr-2 font-bold tracking-tight text-gray-900 dark:text-gray-100">
                     {project.name}
                   </h5>
                   <div className="space-x-2"></div>
                 </div>
-                <div className="h-20 text-gray-100 break-words text-justify mt-2">
+                <div className="h-20 text-gray-700 dark:text-gray-300 break-words text-justify mt-2">
                   {project.description}
                 </div>
                 <div className="h-fit flex flex-wrap gap-1">
@@ -106,17 +106,17 @@ export async function ProjectList(props: { category?: string }) {
                     .map((tech: string) => (
                       <div
                         key={tech}
-                        className="h-fit min-w-fit text-black bg-gray-50 font-medium p-1 rounded border border-gray-700 inline-flex items-center justify-center"
+                        className="h-fit min-w-fit text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 font-medium p-1 rounded shadow-sm"
                       >
                         <span className="text-xs">{tech}</span>
                       </div>
                     ))}
                 </div>
               </div>
-              <div className="text-white break-words underline text-right mt-2 py-2 px-3">
+              <div className="text-gray-800 dark:text-gray-200 break-words underline text-right mt-2 py-2 px-3">
                 {project.repositoryLink && (
                   <a
-                    className="hover:text-red-400"
+                    className="hover:text-red-600 dark:hover:text-red-500"
                     href={project.repositoryLink}
                     target="_blank"
                   >
@@ -126,7 +126,7 @@ export async function ProjectList(props: { category?: string }) {
                 {project.deployLink && (
                   <a
                     href={project.deployLink}
-                    className="ml-3 hover:text-red-400"
+                    className="ml-3 hover:text-red-600 dark:hover:text-red-500"
                     target="_blank"
                   >
                     Deploy
@@ -138,7 +138,9 @@ export async function ProjectList(props: { category?: string }) {
 
         {allProjects.length === 0 && (
           <div>
-            <span className="text-gray-500">Nenhum projeto encontrado.</span>
+            <span className="text-gray-500 dark:text-gray-400">
+              Nenhum projeto encontrado.
+            </span>
           </div>
         )}
       </div>
