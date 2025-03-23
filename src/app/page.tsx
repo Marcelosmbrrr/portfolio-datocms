@@ -30,10 +30,10 @@ export default function Home({
           src="https://laravel.com/assets/img/welcome/background.svg"
         />
         <div className="relative min-h-screen flex flex-col items-center justify-center selection:text-gray-900 dark:selection:text-gray-100">
-          <div className="fixed bottom-4 right-4">
-            <ModeToggle />
-          </div>
           <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl">
+            <div className="fixed bottom-4 right-4">
+              <ModeToggle />
+            </div>
             <header>
               <nav className="border-gray-200 dark:border-gray-700 px-4 lg:px-6 py-2.5">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
